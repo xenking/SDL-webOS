@@ -411,6 +411,12 @@ typedef enum {
 	TRACKPAD_NUM_MODES
 } TrackpadDPadMode;
 
+typedef enum
+{
+	LIZARD_MODE_OFF,
+	LIZARD_MODE_ON,
+} LizardModeState_t;
+
 // Read-write controller settings (only add to this enum and never change the order)
 typedef enum 
 {
@@ -517,6 +523,8 @@ typedef enum
 	// This is a special setting value use for callbacks and should not be set/get explicitly.
 	SETTING_ALL=0xFF
 } ControllerSettings;
+
+#define SETTING_LIZARD_MODE SETTING_MOUSE_POINTER_ENABLED
 
 typedef enum
 {

@@ -132,6 +132,9 @@ extern SDL_bool SDL_IsJoystickSteamController(Uint16 vendor_id, Uint16 product_i
 /* Function to return whether a joystick is a Steam Deck */
 extern SDL_bool SDL_IsJoystickSteamDeck(Uint16 vendor_id, Uint16 product_id);
 
+/* Function to return whether a joystick is a Steam Triton */
+extern SDL_bool SDL_IsJoystickSteamTriton(Uint16 vendor_id, Uint16 product_id);
+
 /* Function to return whether a joystick guid comes from the XInput driver */
 extern SDL_bool SDL_IsJoystickXInput(SDL_JoystickGUID guid);
 

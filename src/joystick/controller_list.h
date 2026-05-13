@@ -600,4 +600,8 @@ static const ControllerDescription_t arrControllers[] = {
 	{ MAKE_CONTROLLER_ID( 0x28de, 0x1201 ), k_eControllerType_SteamControllerV2, NULL },	// Valve wired Steam Controller (HEADCRAB)
 	{ MAKE_CONTROLLER_ID( 0x28de, 0x1202 ), k_eControllerType_SteamControllerV2, NULL },	// Valve Bluetooth Steam Controller (HEADCRAB)
 	{ MAKE_CONTROLLER_ID( 0x28de, 0x1205 ), k_eControllerType_SteamDeck, NULL },	// Valve Steam Deck Builtin Controller
+	{ MAKE_CONTROLLER_ID( 0x28de, 0x1302 ), k_eControllerType_SteamControllerTriton, NULL },	// Valve Steam Triton Controller
+	{ MAKE_CONTROLLER_ID( 0x28de, 0x1303 ), k_eControllerType_SteamControllerTriton, NULL },	// Valve Steam Triton Controller (BLE)
+	{ MAKE_CONTROLLER_ID( 0x28de, 0x1304 ), k_eControllerType_SteamControllerTriton, NULL },	// Valve Steam Proteus Dongle (Proprietary)
+	{ MAKE_CONTROLLER_ID( 0x28de, 0x1305 ), k_eControllerType_SteamControllerTriton, NULL },	// Valve Steam Nereid Dongle (Proprietary)
 };

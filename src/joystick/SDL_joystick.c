@@ -2869,6 +2869,12 @@ SDL_bool SDL_IsJoystickSteamDeck(Uint16 vendor_id, Uint16 product_id)
     return eType == k_eControllerType_SteamDeck;
 }
 
+SDL_bool SDL_IsJoystickSteamTriton(Uint16 vendor_id, Uint16 product_id)
+{
+    EControllerType eType = GuessControllerType(vendor_id, product_id);
+    return eType == k_eControllerType_SteamControllerTriton;
+}
+
 SDL_bool SDL_IsJoystickXInput(SDL_JoystickGUID guid)
 {
     return (guid.data[14] == 'x') ? SDL_TRUE : SDL_FALSE;
