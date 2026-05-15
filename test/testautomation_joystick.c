@@ -5,6 +5,8 @@
 #include "SDL.h"
 #include "SDL_test.h"
 #include "../src/joystick/usb_ids.h"
+#include "../src/joystick/hidapi/steam/controller_structs.h"
+#include <stddef.h>
 
 /* ================= Test Case Implementation ================== */
 
@@ -69,6 +71,36 @@ TestVirtualJoystick(void *arg)
     return TEST_COMPLETED;
 }
 
+/**
+ * @brief Check Steam Triton controller report layouts imported from SDL main
+ *
+ * @sa SDL_hidapi_steam_triton.c
+ */
+static int
+TestSteamTritonReportLayout(void *arg)
+{
+    (void)arg;
+
+    SDLTest_AssertCheck(sizeof(TritonMTUIMUNoQuat_t) == 16,
+                        "TritonMTUIMUNoQuat_t has expected 16-byte BLE IMU layout");
+    SDLTest_AssertCheck(sizeof(TritonMTUNoQuat_t) == 45,
+                        "TritonMTUNoQuat_t has expected 45-byte controller payload layout");
+    SDLTest_AssertCheck(sizeof(TritonMTUFull_t) == 53,
+                        "TritonMTUFull_t keeps expected 53-byte USB/dongle payload layout");
+    SDLTest_AssertCheck(offsetof(TritonMTUNoQuat_t, imu) == 29,
+                        "TritonMTUNoQuat_t IMU offset matches SDL main report parser");
+    SDLTest_AssertCheck(offsetof(TritonMTUNoQuat_t, imu.sGyroZ) == 43,
+                        "TritonMTUNoQuat_t gyro Z offset matches SDL main report parser");
+    SDLTest_AssertCheck(ID_TRITON_CONTROLLER_STATE == 0x42,
+                        "Steam Triton USB/dongle state report id is 0x42");
+    SDLTest_AssertCheck(ID_TRITON_CONTROLLER_STATE_BLE == 0x45,
+                        "Steam Triton BLE state report id is 0x45");
+    SDLTest_AssertCheck(ID_TRITON_WIRELESS_STATUS_X == 0x46,
+                        "Steam Triton wireless status report id is 0x46");
+
+    return TEST_COMPLETED;
+}
+
 /* ================= Test References ================== */
 
 /* Joystick routine test cases */
@@ -76,9 +108,14 @@ static const SDLTest_TestCaseReference joystickTest1 = {
     (SDLTest_TestCaseFp)TestVirtualJoystick, "TestVirtualJoystick", "Test virtual joystick functionality", TEST_ENABLED
 };
 
+static const SDLTest_TestCaseReference joystickTest2 = {
+    (SDLTest_TestCaseFp)TestSteamTritonReportLayout, "TestSteamTritonReportLayout", "Test Steam Triton HID report layout", TEST_ENABLED
+};
+
 /* Sequence of Joystick routine test cases */
 static const SDLTest_TestCaseReference *joystickTests[] = {
     &joystickTest1,
+    &joystickTest2,
     NULL
 };
 
